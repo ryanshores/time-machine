@@ -1,0 +1,15 @@
+version: "3.8"
+
+services:
+  timemachine:
+    build: .
+    container_name: timemachine
+    restart: unless-stopped
+    network_mode: host
+    environment:
+      - TM_USERNAME=${TM_USERNAME:-tmuser}
+      - PASSWORD=${TM_PASSWORD:-tmpassword}
+      - TM_VOLUME_NAME=${TM_VOLUME_NAME:-TimeMachine}
+      - VOLUME_SIZE_LIMIT=${TM_VOLUME_SIZE_LIMIT:-750G}
+    volumes:
+      - /mnt/timemachine/backups:/opt/timemachine
