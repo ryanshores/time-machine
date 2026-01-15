@@ -60,6 +60,7 @@ sudo mkdir -p /mnt/timemachine/backups
 sudo chown -R 1000:1000 /mnt/timemachine
 sudo chmod 700 /mnt/timemachine/backups
 ```
+UID 1000 is the default Linux user — matches Docker nicely.
 
 ## Firewall check (only if UFW is enabled)
 ``` bash
@@ -71,8 +72,6 @@ sudo ufw allow 5353/udp
 sudo ufw allow 445/tcp
 ```
 
-UID 1000 is the default Linux user — matches Docker nicely.
-
 # Step 3: Setup Dockerfile
 
 Using `mbentley/timemachine`
@@ -80,11 +79,3 @@ Using `mbentley/timemachine`
 * Advertises as Time Machine disk
 * Works with Ventura, Sonoma, Sequoia
 * Zero manual Samba config
-
-Install & start Avahi (Time Machine discovery)
-``` Dockerfile
-sudo apt update
-sudo apt install -y avahi-daemon avahi-utils
-sudo systemctl enable avahi-daemon
-sudo systemctl start avahi-daemon
-```
